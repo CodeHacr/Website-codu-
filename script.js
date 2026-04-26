@@ -406,9 +406,9 @@ document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 // ── EMAILJS INIT ──
 // EmailJS setup: Service ID, Template ID, Public Key
 // To activate: sign up at emailjs.com, create a service + template, paste IDs below
-const EMAILJS_SERVICE_ID  = 'service_codemantra';   // ← replace with your EmailJS Service ID
-const EMAILJS_TEMPLATE_ID = 'template_demo_booking'; // ← replace with your EmailJS Template ID
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';        // ← replace with your EmailJS Public Key
+const EMAILJS_SERVICE_ID  = 'service_89wchcs';   // ← replace with your EmailJS Service ID
+const EMAILJS_TEMPLATE_ID = 'template_hhrinx3'; // ← replace with your EmailJS Template ID
+const EMAILJS_PUBLIC_KEY  = 'SmKpJ7MiGS7Ykw1Uy';        // ← replace with your EmailJS Public Key
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
@@ -441,7 +441,7 @@ async function submitForm() {
 
   // Build template params (must match your EmailJS template variables)
   const templateParams = {
-    to_email:  'rajaryan2002k@gmail.com',
+    to_email:  'codemantra101@gmail.com',
     from_name:  name,
     phone:      phone,
     email:      email || 'Not provided',
