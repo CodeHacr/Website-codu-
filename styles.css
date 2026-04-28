@@ -98,7 +98,7 @@ body::after{
 nav {
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 5vw;
+  padding: 0.7rem 5vw 0.4rem;
   background:var(--nav-bg);
   backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
   border-bottom:1px solid var(--border);
@@ -114,10 +114,26 @@ nav {
 .nav-logo sup{font-size:0.5rem;vertical-align:super;-webkit-text-fill-color:#9B5CF6}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a {
-  font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;transition:color 0.2s;
+  display: block;
+
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: var(--text);   /* IMPORTANT */
+
+  text-decoration: none;
+
+  transition: all 0.25s;
 }
-.nav-links a:hover{color:var(--purple)}
+
+.nav-links a:hover {
+  background: rgba(155,92,246,0.12);
+  color: var(--purple);
+  transform: translateX(4px);
+}
 .nav-right{display:flex;gap:0.8rem;align-items:center}
 .btn-nav {
   padding:0.5rem 1.2rem;border-radius:100px;
@@ -163,12 +179,21 @@ nav {
 @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(155,92,246,0.6)}50%{box-shadow:0 0 0 7px rgba(155,92,246,0)}}
 
 h1.hero-h {
+    width: 100%;
+        overflow-wrap: normal;
+  hyphens: none;
+   word-break: normal;
   font-family:var(--font-head);
   font-size:clamp(3rem,8.5vw,7.5rem);
-  font-weight:800;line-height:0.93;
+  font-weight:800;
   letter-spacing:-0.04em;
-  margin-bottom:1.2rem;
+ line-height: 0.95;   /* reduce vertical gap */
+  margin-bottom: 0.8rem;
   opacity:0;animation:fadeUp 0.7s 0.25s forwards;
+}
+h1.hero-h .grad-text {      /* back to inline — no extra block spacing */
+   display: inline !important;
+  white-space: nowrap !important;     /* still won't break mid-word */
 }
 .grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub {
@@ -255,13 +280,17 @@ h2.sec-title {
 
 /* ── TICKER ── */
 .ticker-wrap {
+ margin-top: 0 !important;
   background:var(--grad);
-  padding:0.65rem 0;overflow:hidden;position:relative;
+   padding: 0.4rem 0;overflow:hidden;position:relative;
+    line-height: 1;
 }
+
 .ticker{display:flex;animation:tickerMove 30s linear infinite;width:max-content}
-.ticker-item{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;padding:0 2rem;white-space:nowrap}
+.ticker-item{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;padding:0 1.2rem;white-space:nowrap}
 .ticker-sep{opacity:0.5;padding:0 0.4rem;color:#fff}
 @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
 
 /* ── PAIN POINTS ── */
 #pain{background:var(--bg2);overflow:hidden;position:relative}
@@ -797,6 +826,7 @@ tr:hover td{background:rgba(155,92,246,0.03)}
   gap: 2.5rem;
   max-width: 960px;
   margin: 0 auto;
+  
 }
 
 /* kick into 3-col only at 600px+ */
@@ -837,7 +867,7 @@ tr:hover td{background:rgba(155,92,246,0.03)}
   color: var(--muted);
   line-height: 1.7;
   display: block;          /* remove the flex + gap that was breaking it */
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .footer-col h4 {
@@ -846,7 +876,7 @@ tr:hover td{background:rgba(155,92,246,0.03)}
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 1rem;
+ margin-bottom: 0.6rem; 
 }
 
 .footer-col a {
@@ -863,8 +893,9 @@ tr:hover td{background:rgba(155,92,246,0.03)}
 .social-icons {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;          /* wraps icons if space is tight */
-  margin-top: 0.25rem;
+
+  margin-top: 15px !important;
+  
 }
 
 .social-icons a {
@@ -903,17 +934,111 @@ tr:hover td{background:rgba(155,92,246,0.03)}
 .reveal.visible{opacity:1;transform:none}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 
+
 /* ── MOBILE NAV ── */
 @media(max-width:860px){
   .nav-links {
-    display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;
-    background:var(--nav-bg);padding:1.5rem 5vw;border-bottom:1px solid var(--border);
-    backdrop-filter:blur(20px);gap:1.3rem;
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    right: 10px;
+
+    background: var(--card);
+    border-radius: 18px;
+
+    padding: 1.2rem 1rem;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.35);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+
+    transition: all 0.3s ease;
   }
-  .nav-links.open{display:flex}
-  .burger{display:flex}
-  .btn-nav.btn-ghost{display:none}
+
+  .nav-links li {
+    list-style: none;
 }
+
+.nav-links li:last-child {
+  border-bottom: none;
+}
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+.nav-links.open a {
+  animation: navFade 0.4s ease forwards;
+}
+
+.nav-links.open a:nth-child(1){animation-delay:0.05s}
+.nav-links.open a:nth-child(2){animation-delay:0.1s}
+.nav-links.open a:nth-child(3){animation-delay:0.15s}
+.nav-links.open a:nth-child(4){animation-delay:0.2s}
+
+@keyframes navFade{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+  
+  /* Hide theme toggle and ghost btn on mobile */
+  .toggle-icons{display:none}
+  .btn-nav.btn-ghost{display:none}
+  .btn-nav.btn-grad{display:none}
+
+  /* Burger button - rounded square like image */
+  .burger{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    cursor:pointer;
+    background:rgba(155,92,246,0.12);
+    border:1px solid rgba(155,92,246,0.25);
+    border-radius:12px;
+    width:48px;
+    height:48px;
+    padding:0;
+  }
+  .burger span{
+    display:block;
+    width:20px;
+    height:2px;
+    background:var(--purple);
+    border-radius:2px;
+    transition:all 0.3s;
+  }
+}
+.drawer-btn {
+  display: block;
+  text-align: center;
+
+  background: var(--grad);
+  color: #fff !important;
+
+  padding: 0.9rem;
+  border-radius: 100px;
+  font-weight: 600;
+  margin-top: 0.8rem;
+}
+
 @media(max-width:600px){
   .feat-card.wide{grid-column:span 1}
   .hero-stats{gap:2.5rem}
@@ -1172,3 +1297,264 @@ nav, section, footer, .ticker-wrap, .wa-float { position:relative; z-index:2; }
 }
 
 
+
+/* ============================================================
+   MOBILE FIX — matches the Code MantraAI screenshot exactly
+   Add this AFTER your existing CSS (it overrides only mobile)
+   ============================================================ */
+
+/* ── FORCE LIGHT THEME ON LOAD (add data-theme="light" to <html> in your HTML) ── */
+/* ❌ Hide nav links on big screens */
+@media (min-width: 861px) {
+  .nav-links {
+    display: none !important;
+  }
+}
+/* ── NAV — mobile burger as rounded square ── */
+
+  .burger:hover,
+  .burger:focus {
+    background: rgba(155, 92, 246, 0.2);
+    border-color: rgba(155, 92, 246, 0.45);
+  }
+
+  .burger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--purple);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* Open state — X animation */
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile nav dropdown */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--nav-bg);
+    padding: 1.5rem 5vw;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    gap: 1.3rem;
+  }
+
+  .nav-links.open { display: flex !important; }
+
+  /* Nav logo text sizing */
+  .nav-logo {
+    font-size: 1.1rem;
+  }
+
+  .nav-logo-img {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* ── TICKER — flush, no extra margin ── */
+.ticker-wrap {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0.55rem 0;
+  line-height: 1;
+  position: relative;
+  z-index: 3;
+}
+
+/* ── HERO — mobile sizing to match screenshot ── */
+@media (max-width: 860px) {
+
+  #hero {
+    padding: 5rem 5vw 3.5rem;
+    text-align: center;
+  }
+
+  .hero-badge {
+    font-size: 0.63rem;
+    padding: 0.38rem 1rem;
+    letter-spacing: 0.09em;
+    margin-bottom: 1.8rem;
+  }
+
+  h1.hero-h {
+     font-size: clamp(2rem, 10.5vw, 3.5rem);
+         letter-spacing: -0.02em;
+    line-height: 1.0;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    word-break: normal;
+    overflow-wrap: break-word;
+    margin-bottom: 1rem;
+  }
+    .grad-text {
+    display: inline;
+    word-break: break-word;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.88rem, 3.8vw, 1.15rem);
+    padding: 0 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-desc {
+    font-size: 0.88rem;
+    padding: 0 1rem;
+    margin-bottom: 2.2rem;
+    line-height: 1.75;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .btn-lg {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Stats bar — stack cleanly */
+  .hero-stats {
+    margin-top: 3rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 16px;
+  }
+
+  .hstat-item {
+    flex: 1;
+    min-width: 120px;
+    padding: 1.2rem 1rem;
+  }
+
+  .hstat-num {
+    font-size: 1.9rem;
+  }
+
+  .hstat-label {
+    font-size: 0.65rem;
+  }
+}
+
+/* ── HIDE toggle from nav bar on mobile ── */
+@media (max-width: 860px) {
+  .toggle-icons { display: none !important; }
+  .btn-nav.btn-ghost { display: none !important; }
+  .btn-nav.btn-grad  { display: none !important; }
+}
+ 
+/* ── HERO HEADING — no word break, scales to fit ── */
+h1.hero-h {
+  width: 100%;
+  white-space: normal;
+}
+ 
+h1.hero-h .grad-text {
+  white-space: nowrap;   /* "Tomorrow's" never breaks mid-word */
+  display: block;        /* sits on its own line cleanly */
+}
+ 
+@media (max-width: 860px) {
+  #hero {
+    padding: 5rem 1.2rem 3rem;
+    overflow-x: hidden;
+  }
+ 
+  h1.hero-h {
+    font-size: clamp(1.9rem, 9.5vw, 3.2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    padding: 0;
+  }
+}
+ 
+@media (max-width: 400px) {
+  h1.hero-h {
+    font-size: clamp(1.6rem, 8.5vw, 2.4rem);
+  }
+}
+ /* Toggle row inside mobile nav dropdown */
+@media (max-width: 860px) {
+  .nav-toggle-row {
+    display: flex !important;
+    align-items: center;
+    gap: 0.6rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.3rem;
+    list-style: none;
+  }
+
+  .nav-toggle-row .toggle-icon {
+    font-size: 0.9rem;
+  }
+
+  .nav-toggle-row .theme-toggle {
+    width: 40px;
+    height: 22px;
+  }
+
+  .nav-toggle-row .theme-toggle::after {
+    width: 14px;
+    height: 14px;
+    top: 3px;
+    left: 3px;
+  }
+
+  [data-theme="dark"] .nav-toggle-row .theme-toggle::after {
+    transform: translateX(18px);
+  }
+}
+
+/* ── LIGHT THEME POLISH — match screenshot's clean white look ── */
+[data-theme="light"] nav {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .burger {
+  background: rgba(155, 92, 246, 0.10);
+  border-color: rgba(155, 92, 246, 0.25);
+}
+
+[data-theme="light"] h1.hero-h {
+  color: #1A1530;
+}
+
+[data-theme="light"] .hero-sub {
+  color: #6B6585;
+}
+
+/* ── TICKER ITEMS — tighter on mobile ── */
+@media (max-width: 600px) {
+  .ticker-item {
+    font-size: 0.64rem;
+    padding: 0 0.9rem;
+    letter-spacing: 0.08em;
+  }
+
+  .ticker-sep {
+    padding: 0 0.3rem;
+  }
+}
+
+/* ── ENSURE CORRECT STACKING ── */
+nav { z-index: 200; }
+.ticker-wrap { z-index: 2; }
+#hero { z-index: 1; }
