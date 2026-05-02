@@ -346,7 +346,7 @@ const html = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
 
 // Load saved theme preference
-const savedTheme = localStorage.getItem('cm-theme') || 'light';
+const savedTheme = localStorage.getItem('cm-theme') || 'dark';
 html.setAttribute('data-theme', savedTheme);
 
 themeToggle.addEventListener('click', () => {
